@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include<iostream>
 #include<string>
 
@@ -8,21 +8,21 @@ using namespace std;
 namespace myLib
 {
 	template <typename _Ty>
-	inline _Ty GetUserInput(bool allowZero = false);
-	std::string GetUserInputTxt();
+	inline _Ty getUserInput(bool allowZero = false);
+	std::string getUserInputTxt();
 	unsigned short getUserSelectedTask(unsigned short qtyTask);
 
-	void PrintArr(size_t size, double* Arr);
-	void PrintArr(size_t size, float* Arr);
-	void PrintArr(size_t size, bool NeedCnt, unsigned short* Arr);
-	void PrintArr(size_t size, bool NeedCnt, int* Arr);
-	void PrintArr(size_t size, bool NeedCnt, int* Arr, size_t medianPos);
+	void printArr(size_t size, double* Arr);
+	void printArr(size_t size, float* Arr);
+	void printArr(size_t size, bool NeedCnt, unsigned short* Arr);
+	void printArr(size_t size, bool NeedCnt, int* Arr);
+	void printArr(size_t size, bool NeedCnt, int* Arr, size_t medianPos);
 
 	string getNameFileFromUser(unsigned short indexF);
 }
 
 template <typename _Ty>
-inline _Ty myLib::GetUserInput(bool allowZero)
+inline _Ty myLib::getUserInput(bool allowZero)
 {
 	while (true)
 	{
@@ -30,7 +30,7 @@ inline _Ty myLib::GetUserInput(bool allowZero)
 		cin >> input;
 		if (cin.fail() || (input <= 0) && !allowZero || (input < 0) && allowZero)
 		{
-			cout << "Îøèáêà ââîäà, ïîâòîðèòå ââîä: ";
+			cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°, Ð¿Ð¾Ð²Ñ‚Ð¾Ñ€Ð¸Ñ‚Ðµ Ð²Ð²Ð¾Ð´: ";
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}

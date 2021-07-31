@@ -2,7 +2,7 @@
 
 namespace myLib
 {
-	std::string GetUserInputTxt()
+	std::string getUserInputTxt()
 	{
 		while (true)
 		{
@@ -29,7 +29,7 @@ namespace myLib
 		do
 		{
 			cout << "Введите номер задачи от 1 до " << qtyTask << ":" << endl;
-			taskNumber = GetUserInput<int>(false);
+			taskNumber = getUserInput<int>(false);
 		} while (taskNumber > qtyTask || taskNumber < 1);
 
 		cout << endl;
@@ -37,7 +37,7 @@ namespace myLib
 		return taskNumber;
 	}
 
-	void PrintArr(size_t size, double* Arr)
+	void printArr(size_t size, double* Arr)
 	{
 		cout << "Кол-во элементов = " << size << endl;
 		for (size_t i = 0; i < size; i++)
@@ -47,7 +47,7 @@ namespace myLib
 		cout << endl;
 	}
 
-	void PrintArr(size_t size, float* Arr)
+	void printArr(size_t size, float* Arr)
 	{
 		cout << "Кол-во элементов = " << size << endl;
 		for (size_t i = 0; i < size; i++)
@@ -57,7 +57,7 @@ namespace myLib
 		cout << endl;
 	}
 
-	void PrintArr(size_t size, bool NeedCnt, unsigned short* Arr)
+	void printArr(size_t size, bool NeedCnt, unsigned short* Arr)
 	{
 		if (NeedCnt) cout << "Кол-во элементов = " << size << endl;
 		for (size_t i = 0; i < size; i++)
@@ -67,7 +67,7 @@ namespace myLib
 		cout << endl;
 	}
 
-	void PrintArr(size_t size, bool NeedCnt, int* Arr)
+	void printArr(size_t size, bool NeedCnt, int* Arr)
 	{
 		if (NeedCnt) cout << "Кол-во элементов = " << size << endl;
 		for (size_t i = 0; i < size; i++)
@@ -77,7 +77,7 @@ namespace myLib
 		cout << endl;
 	}
 
-	void PrintArr(size_t size, bool NeedCnt, int* Arr, size_t medianPos)
+	void printArr(size_t size, bool NeedCnt, int* Arr, size_t medianPos)
 	{
 		if (NeedCnt) cout << "Кол-во элементов = " << size << endl;
 		for (size_t i = 0; i < size; i++)
