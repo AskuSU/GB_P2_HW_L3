@@ -2,7 +2,7 @@
 #include<windows.h>
 #include"MyLib.h"
 #include"Task1.h"
-//#include"Task2.h"
+#include"Task2.h"
 //#include"Task3.h"
 #include"Task4.h"
 
@@ -83,8 +83,11 @@ void Task1()
 
 void Task2()
 {
-	cout << "Работа с классом Фрукты:" << endl << endl;
-	
+	cout << "Работа с классом Car и его наследниками:" << endl << endl;
+	Car car;
+	PassengerCar pasCar("BMW", "X5");
+	Bus bus("Volvo", "9700");
+	Minivan minivan("Chevrolet", "Orlando");
 }
 
 void Task3()
