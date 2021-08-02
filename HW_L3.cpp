@@ -97,16 +97,15 @@ void Task3()
 	Fraction fr1;
 	cout << "Введите 1ю дробь: ";
 	while (!fr1.read());
-	//cout << fr1.get();
+	cout << fr1.get() << endl;
 
 	Fraction fr2;
 	cout << "Введите 2ю дробь: ";
 	while (!fr2.read());
-	//cout << fr1.get();
+	cout << fr2.get() << endl;
 
-	Fraction fr3;
-	fr3 = fr1 + fr2;
-	cout << fr3.get();
+	fr1 = fr1 - fr2;
+	cout << fr1.get();
 }
 
 void Task4()

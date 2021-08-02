@@ -7,29 +7,31 @@
 class Fraction
 {
 public:
-	Fraction() : numerator{ 0 }, denominator{ 1 }, val{ "" }
+	Fraction() : wholePart{ 0 }, isNegative{ false }, numerator{ 0 }, denominator{ 1 }, val{ "" }
 	{};
 
 	bool read();
 	const std::string& get();
 
-	Fraction& operator+=(Fraction fr);
-	
-	friend Fraction operator+(Fraction fr1, const Fraction& fr2);
-	friend Fraction operator-(const Fraction& fr1, const Fraction& fr2);
-	friend Fraction operator*(const Fraction& fr1, const Fraction& fr2);
-	friend Fraction operator/(const Fraction& fr1, const Fraction& fr2);
-
-protected:
-	Fraction(int64_t num, int64_t den) : numerator{ num }, denominator{ den }
-	{};
+	Fraction& operator+=(const Fraction& fr);
+	Fraction& operator-=(const Fraction& fr);
+	Fraction& operator*=(const Fraction& fr);
+	Fraction& operator/=(const Fraction& fr);
 
 private:
-	int64_t numerator, denominator;
+	uint64_t wholePart, numerator, denominator;
+	bool isNegative;
 	std::string val;
 
 	void cinFail();
+	void checkIsNegative(int64_t& val);
+	void simplifyAfraction();
 };
+
+Fraction operator+(Fraction fr1, const Fraction& fr2);
+Fraction operator-(Fraction fr1, const Fraction& fr2);
+Fraction operator*(Fraction fr1, const Fraction& fr2);
+Fraction operator/(Fraction fr1, const Fraction& fr2);
 
 uint64_t NOD(uint64_t a, uint64_t b);
 uint64_t NOK(const uint64_t& a, const uint64_t& b);

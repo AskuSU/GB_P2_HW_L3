@@ -2,8 +2,9 @@
 
 bool Fraction::read()
 {
+	int64_t input;
 	using std::cin;
-	cin >> numerator;
+	cin >> input;
 	if (cin.fail())
 	{
 		cinFail();
@@ -12,26 +13,42 @@ bool Fraction::read()
 	{
 		if (cin)
 		{
-			if (cin.peek() == '/')
+			if (cin.peek() == ' ')
 			{
 				cin.ignore();
-				cin >> denominator;
+				checkIsNegative(input);				
+				wholePart = input;
+				cin >> input;
+				if (cin.fail())
+				{
+					cinFail();
+					return false;
+				};
+			}
+			else
+			{
+				wholePart = 0;
+				isNegative = false;
+			}
+			if (cin.peek() == '/')
+			{				
+				cin.ignore();
+				checkIsNegative(input);
+				numerator = input;
+				cin >> input;
 				if (cin.fail()) 
 				{
 					cinFail();
 					return false;
 				};
-				if (denominator == 0)
+				if (input == 0)
 				{
 					std::cout << "Нулевой делитель невозможен! Повторите ввод: ";
 					denominator = 1;
 					return false;
 				}
-				if (denominator < 0)
-				{
-					numerator = -numerator;
-					denominator = -denominator;
-				}
+				checkIsNegative(input);
+				denominator = input;
 			}
 			else
 			{
@@ -39,6 +56,7 @@ bool Fraction::read()
 			}
 			cin.clear();
 			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			simplifyAfraction();
 			return true;
 		}
 	}
@@ -48,19 +66,46 @@ bool Fraction::read()
 const std::string& Fraction::get()
 {
 	val = "";
-	val += std::to_string(numerator);
-	if (denominator != 1) 
+	if (isNegative)
 	{
-		val += "/" + std::to_string(denominator); 
-	};
+		val += "-";
+	}
+	if (wholePart)
+	{
+		val += std::to_string(wholePart) + " ";
+	}
+	if (numerator && (denominator != 1))
+	{
+		val += std::to_string(numerator) + "/" + std::to_string(denominator);
+	}
 	return val;
 }
 
-Fraction& Fraction::operator+=(Fraction fr)
+Fraction& Fraction::operator+=(const Fraction& fr)
 {
 	int64_t nok = NOK(denominator, fr.denominator);
+	wholePart += fr.wholePart;
 	numerator = numerator * nok / denominator + fr.numerator * nok / fr.denominator;
 	denominator = nok;
+	simplifyAfraction();
+	return *this;
+}
+
+Fraction& Fraction::operator-=(const Fraction& fr)
+{
+	
+	return *this;
+}
+
+Fraction& Fraction::operator*=(const Fraction& fr)
+{
+
+	return *this;
+}
+
+Fraction& Fraction::operator/=(const Fraction& fr)
+{
+
 	return *this;
 }
 
@@ -74,6 +119,30 @@ void Fraction::cinFail()
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
+void Fraction::checkIsNegative(int64_t& val)
+{
+	if (val < 0)
+	{
+		isNegative = !isNegative;
+		val = -val;
+	}
+}
+
+void Fraction::simplifyAfraction()
+{
+	if (numerator >= denominator)
+	{
+		wholePart += numerator / denominator;
+		numerator %= denominator;
+	}
+	uint64_t nod = NOD(numerator, denominator);
+	if (nod > 1)
+	{
+		numerator /= nod;
+		denominator /= nod;
+	}
+}
+
 
 Fraction operator+(Fraction fr1, const Fraction& fr2)
 {
@@ -81,25 +150,22 @@ Fraction operator+(Fraction fr1, const Fraction& fr2)
 	return fr1;
 };
 
-Fraction operator-(const Fraction& fr1, const Fraction& fr2)
+Fraction operator-(Fraction fr1, const Fraction& fr2)
 {
-	Fraction fr;
-
-	return fr;
+	fr1 -= fr2;
+	return fr1;
 };
 
-Fraction operator*(const Fraction& fr1, const Fraction& fr2)
+Fraction operator*(Fraction fr1, const Fraction& fr2)
 {
-	Fraction fr;
-
-	return fr;
+	fr1 *= fr2;
+	return fr1;
 };
 
-Fraction operator/(const Fraction& fr1, const Fraction& fr2)
+Fraction operator/(Fraction fr1, const Fraction& fr2)
 {
-	Fraction fr;
-
-	return fr;
+	fr1 /= fr2;
+	return fr1;
 };
 
 uint64_t NOD(uint64_t a, uint64_t b)
