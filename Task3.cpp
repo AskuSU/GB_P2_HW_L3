@@ -81,11 +81,59 @@ const std::string& Fraction::get()
 	return val;
 }
 
+Fraction Fraction::operator-() const
+{
+	return Fraction(wholePart, numerator, denominator, !isNegative);
+}
+
 Fraction& Fraction::operator+=(const Fraction& fr)
 {
 	int64_t nok = NOK(denominator, fr.denominator);
-	wholePart += fr.wholePart;
-	numerator = numerator * nok / denominator + fr.numerator * nok / fr.denominator;
+	uint64_t thisNum, frNum;
+	bool resFractNegativ;
+	if (isNegative ^ fr.isNegative)
+	{
+		if (wholePart >= fr.wholePart)
+		{
+			wholePart -= fr.wholePart;
+		}
+		else
+		{
+			wholePart = fr.wholePart - wholePart;
+			isNegative = fr.isNegative;
+		}
+		
+		thisNum = numerator * nok / denominator;
+		frNum = fr.numerator * nok / fr.denominator;
+		if (thisNum >= frNum)
+		{
+			numerator = thisNum - frNum;
+			resFractNegativ = isNegative;
+		}
+		else
+		{
+			numerator = frNum - thisNum;
+			resFractNegativ = fr.isNegative;
+		}
+		
+		if (isNegative ^ resFractNegativ)
+		{
+			if (wholePart > 0)
+			{
+				wholePart--;
+				numerator = nok - numerator;
+			}
+			else
+			{
+				isNegative = resFractNegativ;
+			}
+		}
+	}
+	else
+	{
+		wholePart += fr.wholePart;
+		numerator = numerator * nok / denominator + fr.numerator * nok / fr.denominator;
+	}	
 	denominator = nok;
 	simplifyAfraction();
 	return *this;
@@ -93,7 +141,7 @@ Fraction& Fraction::operator+=(const Fraction& fr)
 
 Fraction& Fraction::operator-=(const Fraction& fr)
 {
-	
+	*this += -fr;
 	return *this;
 }
 

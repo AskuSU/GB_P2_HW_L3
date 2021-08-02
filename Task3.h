@@ -13,6 +13,8 @@ public:
 	bool read();
 	const std::string& get();
 
+	Fraction operator-() const;
+
 	Fraction& operator+=(const Fraction& fr);
 	Fraction& operator-=(const Fraction& fr);
 	Fraction& operator*=(const Fraction& fr);
@@ -23,6 +25,8 @@ private:
 	bool isNegative;
 	std::string val;
 
+	Fraction(uint64_t whP, uint64_t num, uint64_t den, bool isNeg) : wholePart{ whP }, numerator{ num }, denominator{ den }, isNegative{ isNeg }
+	{};
 	void cinFail();
 	void checkIsNegative(int64_t& val);
 	void simplifyAfraction();
