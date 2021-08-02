@@ -3,7 +3,7 @@
 #include"MyLib.h"
 #include"Task1.h"
 #include"Task2.h"
-//#include"Task3.h"
+#include"Task3.h"
 #include"Task4.h"
 
 using namespace std;
@@ -92,7 +92,21 @@ void Task2()
 
 void Task3()
 {
-	
+	cout << "Работа с классом Дроби:" << endl << endl;
+
+	Fraction fr1;
+	cout << "Введите 1ю дробь: ";
+	while (!fr1.read());
+	//cout << fr1.get();
+
+	Fraction fr2;
+	cout << "Введите 2ю дробь: ";
+	while (!fr2.read());
+	//cout << fr1.get();
+
+	Fraction fr3;
+	fr3 = fr1 + fr2;
+	cout << fr3.get();
 }
 
 void Task4()
