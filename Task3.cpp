@@ -13,46 +13,54 @@ bool Fraction::read()
 	{
 		if (cin)
 		{
-			if (cin.peek() == ' ')
+			if (cin.peek() == '\n')
 			{
-				cin.ignore();
-				checkIsNegative(input);				
+				checkIsNegative(input);
 				wholePart = input;
-				cin >> input;
-				if (cin.fail())
-				{
-					cinFail();
-					return false;
-				};
 			}
 			else
 			{
-				wholePart = 0;
-				isNegative = false;
-			}
-			if (cin.peek() == '/')
-			{				
-				cin.ignore();
-				checkIsNegative(input);
-				numerator = input;
-				cin >> input;
-				if (cin.fail()) 
+				if (cin.peek() == ' ')
 				{
-					cinFail();
-					return false;
-				};
-				if (input == 0)
-				{
-					std::cout << "Нулевой делитель невозможен! Повторите ввод: ";
-					denominator = 1;
-					return false;
+					cin.ignore();
+					checkIsNegative(input);
+					wholePart = input;
+					cin >> input;
+					if (cin.fail())
+					{
+						cinFail();
+						return false;
+					};
 				}
-				checkIsNegative(input);
-				denominator = input;
-			}
-			else
-			{
-				denominator = 1;
+				else
+				{
+					wholePart = 0;
+					isNegative = false;
+				}
+				if (cin.peek() == '/')
+				{
+					cin.ignore();
+					checkIsNegative(input);
+					numerator = input;
+					cin >> input;
+					if (cin.fail())
+					{
+						cinFail();
+						return false;
+					};
+					if (input == 0)
+					{
+						std::cout << "Нулевой делитель невозможен! Повторите ввод: ";
+						denominator = 1;
+						return false;
+					}
+					checkIsNegative(input);
+					denominator = input;
+				}
+				else
+				{
+					denominator = 1;
+				}
 			}
 			cin.clear();
 			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -153,7 +161,21 @@ Fraction& Fraction::operator*=(const Fraction& fr)
 
 Fraction& Fraction::operator/=(const Fraction& fr)
 {
-
+	uint64_t newNum, newDen;
+	if (fr.numerator)
+	{
+		newDen = fr.numerator;
+	}
+	else
+	{
+		newDen = 1;
+	}	
+	newNum = fr.denominator;
+	if (fr.wholePart)
+	{
+		newDen *= fr.wholePart;
+	}
+	*this *= Fraction(0, newNum, newDen, fr.isNegative);
 	return *this;
 }
 
