@@ -20,6 +20,10 @@ public:
 	Fraction& operator*=(const Fraction& fr);
 	Fraction& operator/=(const Fraction& fr);
 
+	friend bool operator==(const Fraction& fr1, const Fraction& fr2);
+	friend bool operator<(const Fraction& fr1, const Fraction& fr2);
+	friend bool operator>(const Fraction& fr1, const Fraction& fr2);
+
 private:
 	uint64_t wholePart, numerator, denominator;
 	bool isNegative;
@@ -36,6 +40,14 @@ Fraction operator+(Fraction fr1, const Fraction& fr2);
 Fraction operator-(Fraction fr1, const Fraction& fr2);
 Fraction operator*(Fraction fr1, const Fraction& fr2);
 Fraction operator/(Fraction fr1, const Fraction& fr2);
+
+bool operator==(const Fraction& fr1, const Fraction& fr2);
+bool operator!=(const Fraction& fr1, const Fraction& fr2);
+bool operator<(const Fraction& fr1, const Fraction& fr2);
+bool operator<=(const Fraction& fr1, const Fraction& fr2);
+bool operator>(const Fraction& fr1, const Fraction& fr2);
+bool operator>=(const Fraction& fr1, const Fraction& fr2);
+
 
 uint64_t NOD(uint64_t a, uint64_t b);
 uint64_t NOK(const uint64_t& a, const uint64_t& b);

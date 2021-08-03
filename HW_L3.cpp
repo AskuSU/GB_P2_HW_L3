@@ -104,8 +104,9 @@ void Task3()
 	while (!fr2.read());
 	cout << fr2.get() << endl;
 
-	fr1 = fr1 / fr2;
-	cout << fr1.get();
+	/*fr1 = fr1 / fr2;
+	cout << fr1.get();*/
+	cout << (fr1 >= fr2) << endl;
 }
 
 void Task4()

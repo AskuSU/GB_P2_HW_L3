@@ -280,6 +280,45 @@ Fraction operator/(Fraction fr1, const Fraction& fr2)
 	return fr1;
 };
 
+bool operator==(const Fraction& fr1, const Fraction& fr2)
+{
+	return ((fr1.isNegative  == fr2.isNegative)	&&
+			(fr1.wholePart	 == fr2.wholePart)	&&
+			(fr1.numerator	 == fr2.numerator)	&&
+			(fr1.denominator == fr2.denominator));
+}
+
+bool operator!=(const Fraction& fr1, const Fraction& fr2)
+{
+	return !(fr1 == fr2);
+}
+
+bool operator<(const Fraction& fr1, const Fraction& fr2)
+{
+	uint64_t nok, newFr1Num, newFr2Num;
+	if (fr1.isNegative && !fr2.isNegative) return true;
+	else if (!fr1.isNegative && fr2.isNegative) return false;
+	else
+	{
+		if (fr1.wholePart > fr2.wholePart) return fr1.isNegative;
+		else if (fr1.wholePart < fr2.wholePart) return !fr1.isNegative;
+		else
+		{
+			nok = NOK(fr1.denominator, fr2.denominator);
+			newFr1Num = nok / fr1.denominator * fr1.numerator;
+			newFr2Num = nok / fr2.denominator * fr2.numerator;
+			if (newFr1Num > newFr2Num) return fr1.isNegative;
+			else if (newFr1Num < newFr2Num) return !fr1.isNegative;
+			else return false;
+		}
+	}
+}
+
+bool operator>=(const Fraction& fr1, const Fraction& fr2)
+{
+	return !(fr1 < fr2);
+};
+
 uint64_t NOD(uint64_t a, uint64_t b)
 {
 	while (a && b)
