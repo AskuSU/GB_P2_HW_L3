@@ -155,27 +155,69 @@ Fraction& Fraction::operator-=(const Fraction& fr)
 
 Fraction& Fraction::operator*=(const Fraction& fr)
 {
-
+	uint64_t newFrNum, newFrDen, nod;
+	if (wholePart)
+	{
+		numerator += wholePart * denominator;
+		wholePart = 0;
+	}
+	if (fr.wholePart)
+	{
+		newFrNum = fr.numerator + fr.denominator * fr.wholePart;
+	}
+	else
+	{
+		newFrNum = fr.numerator;
+	}
+	nod = NOD(numerator, fr.denominator);
+	if (nod > 1)
+	{
+		numerator /= nod;
+		newFrDen = fr.denominator / nod;
+	}
+	else
+	{
+		newFrDen = fr.denominator;
+	}
+	nod = NOD(denominator, newFrNum);
+	if (nod > 1)
+	{
+		denominator /= nod;
+		newFrNum /= nod;
+	}
+	numerator *= newFrNum;
+	denominator *= newFrDen;
+	if (fr.isNegative)
+	{
+		isNegative = !isNegative;
+	}
+	simplifyAfraction();
 	return *this;
 }
 
 Fraction& Fraction::operator/=(const Fraction& fr)
 {
-	uint64_t newNum, newDen;
+	uint64_t newDen;
 	if (fr.numerator)
 	{
 		newDen = fr.numerator;
+		if (fr.wholePart)
+		{
+			newDen += fr.wholePart * fr.denominator;
+		}
 	}
 	else
 	{
-		newDen = 1;
-	}	
-	newNum = fr.denominator;
-	if (fr.wholePart)
-	{
-		newDen *= fr.wholePart;
-	}
-	*this *= Fraction(0, newNum, newDen, fr.isNegative);
+		if (fr.wholePart)
+		{
+			newDen = fr.wholePart * fr.denominator;
+		}
+		else
+		{
+			newDen = 1;
+		}
+	}		
+	*this *= Fraction(0, fr.denominator, newDen, fr.isNegative);
 	return *this;
 }
 
