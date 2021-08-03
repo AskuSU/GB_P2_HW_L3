@@ -11,7 +11,7 @@ public:
 	{};
 
 	bool read();
-	const std::string& get();
+	const std::string& get(bool afterOperation = false);
 
 	Fraction operator-() const;
 
@@ -22,7 +22,6 @@ public:
 
 	friend bool operator==(const Fraction& fr1, const Fraction& fr2);
 	friend bool operator<(const Fraction& fr1, const Fraction& fr2);
-	friend bool operator>(const Fraction& fr1, const Fraction& fr2);
 
 private:
 	uint64_t wholePart, numerator, denominator;

@@ -94,19 +94,29 @@ void Task3()
 {
 	cout << "Работа с классом Дроби:" << endl << endl;
 
-	Fraction fr1;
+	Fraction fr1, fr2, frResult;
 	cout << "Введите 1ю дробь: ";
 	while (!fr1.read());
-	cout << fr1.get() << endl;
-
-	Fraction fr2;
 	cout << "Введите 2ю дробь: ";
 	while (!fr2.read());
-	cout << fr2.get() << endl;
 
-	/*fr1 = fr1 / fr2;
-	cout << fr1.get();*/
-	cout << (fr1 >= fr2) << endl;
+	cout << boolalpha;
+	
+	frResult = fr1 + fr2;
+	cout << fr1.get() << " + " << fr2.get(true) << " = " << frResult.get() << endl;
+	frResult = fr1 - fr2;
+	cout << fr1.get() << " - " << fr2.get(true) << " = " << frResult.get() << endl;
+	frResult = fr1 * fr2;
+	cout << fr1.get() << " * " << fr2.get(true) << " = " << frResult.get() << endl;
+	frResult = fr1 / fr2;
+	cout << fr1.get() << " : " << fr2.get(true) << " = " << frResult.get() << endl << endl;
+
+	cout << fr1.get() << " <  " << fr2.get(true) << " is " << (fr1 < fr2) << endl;
+	cout << fr1.get() << " <= " << fr2.get(true) << " is " << (fr1 <= fr2) << endl;
+	cout << fr1.get() << " >  " << fr2.get(true) << " is " << (fr1 > fr2) << endl;
+	cout << fr1.get() << " >= " << fr2.get(true) << " is " << (fr1 >= fr2) << endl;
+	cout << fr1.get() << " =  " << fr2.get(true) << " is " << (fr1 == fr2) << endl;
+	cout << fr1.get() << " <> " << fr2.get(true) << " is " << (fr1 != fr2) << endl;
 }
 
 void Task4()

@@ -71,11 +71,12 @@ bool Fraction::read()
 	return false;
 }
 
-const std::string& Fraction::get()
+const std::string& Fraction::get(bool afterOperation)
 {
 	val = "";
 	if (isNegative)
 	{
+		if (afterOperation) val += "(";
 		val += "-";
 	}
 	if (wholePart)
@@ -86,6 +87,7 @@ const std::string& Fraction::get()
 	{
 		val += std::to_string(numerator) + "/" + std::to_string(denominator);
 	}
+	if (isNegative && afterOperation) val += ")";
 	return val;
 }
 
@@ -313,6 +315,16 @@ bool operator<(const Fraction& fr1, const Fraction& fr2)
 		}
 	}
 }
+
+bool operator<=(const Fraction& fr1, const Fraction& fr2)
+{
+	return !(fr1 > fr2);
+}
+
+bool operator>(const Fraction& fr1, const Fraction& fr2)
+{
+	return fr2 < fr1;
+};
 
 bool operator>=(const Fraction& fr1, const Fraction& fr2)
 {
