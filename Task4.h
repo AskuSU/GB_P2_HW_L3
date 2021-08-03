@@ -33,10 +33,13 @@ public:
 	
 	Denomination getDenomination() { return denomination; };
 	Suit getSuit() { return suit; };
+	void flip() { isHidden = !isHidden; };
+	uint16_t getValue();
 
 private:
 	Denomination denomination;
 	Suit suit;
+	bool isHidden;
 	bool isStayedInTheDeck;
 
 };

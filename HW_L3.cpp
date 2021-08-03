@@ -111,9 +111,9 @@ void Task3()
 	frResult = fr1 / fr2;
 	cout << fr1.get() << " : " << fr2.get(true) << " = " << frResult.get() << endl << endl;
 
-	cout << fr1.get() << " <  " << fr2.get(true) << " is " << (fr1 < fr2) << endl;
+	cout << fr1.get() << " <  " << fr2.get(true) << " is " << (fr1 <  fr2) << endl;
 	cout << fr1.get() << " <= " << fr2.get(true) << " is " << (fr1 <= fr2) << endl;
-	cout << fr1.get() << " >  " << fr2.get(true) << " is " << (fr1 > fr2) << endl;
+	cout << fr1.get() << " >  " << fr2.get(true) << " is " << (fr1 >  fr2) << endl;
 	cout << fr1.get() << " >= " << fr2.get(true) << " is " << (fr1 >= fr2) << endl;
 	cout << fr1.get() << " =  " << fr2.get(true) << " is " << (fr1 == fr2) << endl;
 	cout << fr1.get() << " <> " << fr2.get(true) << " is " << (fr1 != fr2) << endl;
@@ -123,7 +123,9 @@ void Task4()
 {
 	cout << "Работа с классом Колоды карт:" << endl << endl;
 
-	Deck deck;
+	Card card;
+	card.setValue(Denomination::J, Suit::diamonds);
+	cout << "кол-во очков: " << card.getValue() << endl;
 }
 
 
@@ -147,7 +149,7 @@ int main()
 			break;
 		case 3: Task3();
 			break;
-		case 4: Task3();
+		case 4: Task4();
 			break;
 		}
 		cout << endl;

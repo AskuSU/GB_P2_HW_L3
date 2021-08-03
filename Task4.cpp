@@ -19,14 +19,21 @@ Suit end(Suit suit)
 };
 
 
-Card::Card() : isStayedInTheDeck(true)
+Card::Card() : isHidden{ true }, isStayedInTheDeck{ true }
 {};
 
 void Card::setValue(Denomination den, Suit suit)
 {
 	denomination = den;
 	this->suit = suit;
-};
+}
+uint16_t Card::getValue()
+{
+	uint16_t val = std::underlying_type<Denomination>::type(denomination);
+	if (val > 10) val = 10;
+	return val;
+}
+;
 
 Deck::Deck()
 {
