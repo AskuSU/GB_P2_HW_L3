@@ -9,6 +9,8 @@ namespace figures
 
 		virtual float area() = 0;
 		void printArea();
+
+		virtual ~Figure() {};
 	};
 
 	class Parallelogram : public Figure
